@@ -22,14 +22,26 @@ datas = pd.DataFrame(data=[line for line in cursor.fetchall()], columns=columns)
 datas.Date = pd.to_datetime(datas.Date,dayfirst=True)
 datas.index = datas.Date
 
+# Add total of cases
+datas['total'] = datas.sum(axis=1)
+
+# Rearrange the columns names
+columns = columns[1:]
+columns.append('total')
+
+plt.style.use('seaborn') #.context('Solarize_Light2')
+
 # Matplotlib formatting to put the dates on the X axis
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m/%Y'))
 # Set an interval between labels so it won't be overcrowded
 plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=3))
 
-# Plot data from the State that you want, just change the abbreviation and title of the image
-plt.plot(datas.index,datas['SP'])
-plt.gcf().autofmt_xdate()
-plt.grid(True)
-plt.title('SP Cases')
-plt.show()
+# Plot data from each State that you wan, just change the abbreviation and title of the image
+for col in columns:
+    plt.plot(datas.index,datas[col])
+    plt.gcf().autofmt_xdate()
+    plt.grid(True)
+    plt.title('Coronavirus Cases in ' + col)
+    #plt.show()
+    plt.savefig(col + '_cases.png', dpi=300)
+    plt.close()
