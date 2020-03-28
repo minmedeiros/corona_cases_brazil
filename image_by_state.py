@@ -34,7 +34,7 @@ plt.style.use('seaborn') #.context('Solarize_Light2')
 # Matplotlib formatting to put the dates on the X axis
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m/%Y'))
 # Set an interval between labels so it won't be overcrowded
-plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=3))
+plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=4))
 
 # Plot data from each State that you wan, just change the abbreviation and title of the image
 for col in columns:
@@ -43,5 +43,5 @@ for col in columns:
     plt.grid(True)
     plt.title('Coronavirus Cases in ' + col)
     #plt.show()
-    plt.savefig(col + '_cases.png', dpi=300)
+    plt.savefig(col + '_cases.png', dpi=100)
     plt.close()
