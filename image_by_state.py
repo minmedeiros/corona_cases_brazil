@@ -43,5 +43,5 @@ for col in columns:
     plt.grid(True)
     plt.title('Coronavirus Cases in ' + col)
     #plt.show()
-    plt.savefig(col + '_cases.png', dpi=100)
+    plt.savefig(col + '_cases.png', dpi=200)
     plt.close()
