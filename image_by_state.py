@@ -29,7 +29,7 @@ datas['total'] = datas.sum(axis=1)
 columns = columns[1:]
 columns.append('total')
 
-plt.style.use('seaborn') #.context('Solarize_Light2')
+plt.style.use('seaborn')
 
 # Matplotlib formatting to put the dates on the X axis
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m/%Y'))
