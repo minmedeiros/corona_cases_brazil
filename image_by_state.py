@@ -10,7 +10,7 @@ conn = sqlite3.connect('corona_per_state.db')
 cursor = conn.cursor()
 
 # Select all rows and columns from sheet "CORONA_CASES", there is also "CORONA_DEATHS"
-cursor.execute("SELECT * FROM CORONA_CASES")
+cursor.execute("SELECT * FROM CORONA_DEATHS")
 
 # Get name of the fields... you should expect "Date", and then each state abbreviation alphabetically)
 columns = [description[0] for description in cursor.description]
@@ -24,6 +24,8 @@ datas.index = datas.Date
 
 # Add total of cases
 datas['total'] = datas.sum(axis=1)
+
+datas[['AM','CE','RJ','SP','total']].to_csv('corona_cases_brazil.csv')
 
 # Rearrange the columns names
 columns = columns[1:]
@@ -41,7 +43,7 @@ for col in columns:
     plt.plot(datas.index,datas[col])
     plt.gcf().autofmt_xdate()
     plt.grid(True)
-    plt.title('Coronavirus Cases in ' + col)
+    plt.title('Coronavirus Deaths in ' + col)
     #plt.show()
-    plt.savefig(col + '_cases.png', dpi=200)
+    plt.savefig(col + '_deaths.png', dpi=200)
     plt.close()
